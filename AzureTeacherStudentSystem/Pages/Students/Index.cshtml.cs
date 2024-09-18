@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AzureTeacherStudentSystem.Data;
 using AzureTeacherStudentSystem.Models;
 
-namespace AzureTeacherStudentSystem.Pages
+namespace AzureTeacherStudentSystem.Pages.Students
 {
     public class IndexModel : PageModel
     {
@@ -19,8 +19,11 @@ namespace AzureTeacherStudentSystem.Pages
             _context = context;
         }
 
+        public IList<Student> Student { get;set; } = default!;
+
         public async Task OnGetAsync()
         {
+            Student = await _context.Students.ToListAsync();
         }
     }
 }

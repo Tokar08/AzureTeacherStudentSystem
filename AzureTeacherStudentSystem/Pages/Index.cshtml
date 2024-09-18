@@ -1,24 +1,12 @@
 ﻿@page
-@model IndexModel
+@model AzureTeacherStudentSystem.Pages.IndexModel
+
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<div class="text-center">
-    <form method="post">
-        <label>Message Text: </label>
-        <input type="text" asp-for="AddMessage"/>
-        <input type="submit" value="Send" class="btn btn-primary" />
-    </form>
+<h1>Index</h1>
 
-    <br/>
-    <br/>
-    <br/>
-
-    <ul>
-        @foreach(var message in Model.Messages)
-        {
-            <li>@message</li>
-        }
-    </ul>
-</div>
+<a asp-page="Students/Index" class="btn btn-success">Students</a>
+<a asp-page="Teachers/Index" class="btn btn-success">Teachers</a>
