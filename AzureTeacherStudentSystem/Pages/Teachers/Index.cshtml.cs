@@ -23,7 +23,8 @@ namespace AzureTeacherStudentSystem.Pages.Teachers
 
         public async Task OnGetAsync()
         {
-            Teacher = await _context.Teachers.ToListAsync();
+            Teacher = await _context.Teachers
+                .ToListAsync();
         }
     }
 }
