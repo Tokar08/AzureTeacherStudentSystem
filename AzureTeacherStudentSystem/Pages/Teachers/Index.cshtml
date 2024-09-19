@@ -29,6 +29,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Teacher[0].Password)
             </th>
+            <th>
+                Subject
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -49,6 +52,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subjects.First().Name)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |

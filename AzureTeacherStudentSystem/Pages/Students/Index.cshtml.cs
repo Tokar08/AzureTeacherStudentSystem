@@ -26,12 +26,8 @@ namespace AzureTeacherStudentSystem.Pages.Students
             /*написати запит на отримання перших 20 студентів що вчаться у групі
                 groupName і чиє імя містить букву а*/
 
-            var groupName = "";
-
             Student = await _context.Students
                 .Include(s => s.Group)
-                .Where(s => s.Group.Name.Equals(groupName) && s.FirstName.Contains("a"))
-                .Take(20)
                 .ToListAsync();
         }
     }

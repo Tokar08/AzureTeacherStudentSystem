@@ -8,24 +8,22 @@ using Microsoft.EntityFrameworkCore;
 using AzureTeacherStudentSystem.Data;
 using AzureTeacherStudentSystem.Models;
 
-namespace AzureTeacherStudentSystem.Pages.Teachers
+namespace AzureTeacherStudentSystem.Pages.Subjects
 {
     public class IndexModel : PageModel
     {
-        private readonly DataContext _context;
+        private readonly AzureTeacherStudentSystem.Data.DataContext _context;
 
-        public IndexModel(DataContext context)
+        public IndexModel(AzureTeacherStudentSystem.Data.DataContext context)
         {
             _context = context;
         }
 
-        public IList<Teacher> Teacher { get;set; } = default!;
+        public IList<Subject> Subject { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            Teacher = await _context.Teachers
-                .Include(x => x.Subjects)
-                .ToListAsync();
+            Subject = await _context.Subjects.ToListAsync();
         }
     }
 }

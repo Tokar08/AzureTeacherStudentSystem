@@ -36,7 +36,7 @@ namespace AzureTeacherStudentSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Groups");
+                    b.ToTable("Groups", (string)null);
                 });
 
             modelBuilder.Entity("AzureTeacherStudentSystem.Models.Subject", b =>
@@ -64,7 +64,7 @@ namespace AzureTeacherStudentSystem.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("Subjects");
+                    b.ToTable("Subjects", (string)null);
                 });
 
             modelBuilder.Entity("AzureTeacherStudentSystem.Models.User", b =>
@@ -98,7 +98,7 @@ namespace AzureTeacherStudentSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
 
                     b.HasDiscriminator().HasValue("User");
 
@@ -114,7 +114,7 @@ namespace AzureTeacherStudentSystem.Migrations
 
                     b.HasIndex("GroupId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
 
                     b.HasDiscriminator().HasValue("Student");
                 });
@@ -126,7 +126,7 @@ namespace AzureTeacherStudentSystem.Migrations
                     b.Property<int>("Salary")
                         .HasColumnType("int");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
 
                     b.HasDiscriminator().HasValue("Teacher");
                 });

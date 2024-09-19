@@ -26,6 +26,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Student[0].Password)
             </th>
+            <th>
+                Group
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -44,6 +47,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Password)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Group.Name)
+                </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using AzureTeacherStudentSystem.Data;
 using AzureTeacherStudentSystem.Models;
 
-namespace AzureTeacherStudentSystem.Pages.Students
+namespace AzureTeacherStudentSystem.Pages.Groups
 {
     public class EditModel : PageModel
     {
@@ -18,13 +18,10 @@ namespace AzureTeacherStudentSystem.Pages.Students
         public EditModel(AzureTeacherStudentSystem.Data.DataContext context)
         {
             _context = context;
-            Groups = new();
         }
 
-        public List<Group> Groups { get; set; }
-
         [BindProperty]
-        public Student Student { get; set; } = default!;
+        public Group Group { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -33,29 +30,25 @@ namespace AzureTeacherStudentSystem.Pages.Students
                 return NotFound();
             }
 
-            Groups = _context.Groups.ToList();
-
-            var student =  await _context.Students.FirstOrDefaultAsync(m => m.Id == id);
-            if (student == null)
+            var group =  await _context.Groups.FirstOrDefaultAsync(m => m.Id == id);
+            if (group == null)
             {
                 return NotFound();
             }
-            Student = student;
+            Group = group;
             return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more information, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync(int group)
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            Student.Group = _context.Groups.Find(group);
-
-            _context.Attach(Student).State = EntityState.Modified;
+            _context.Attach(Group).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +56,7 @@ namespace AzureTeacherStudentSystem.Pages.Students
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!StudentExists(Student.Id))
+                if (!GroupExists(Group.Id))
                 {
                     return NotFound();
                 }
@@ -76,9 +69,9 @@ namespace AzureTeacherStudentSystem.Pages.Students
             return RedirectToPage("./Index");
         }
 
-        private bool StudentExists(int id)
+        private bool GroupExists(int id)
         {
-            return _context.Students.Any(e => e.Id == id);
+            return _context.Groups.Any(e => e.Id == id);
         }
     }
 }

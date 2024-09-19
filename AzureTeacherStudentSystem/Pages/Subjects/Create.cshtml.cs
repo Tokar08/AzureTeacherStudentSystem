@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using AzureTeacherStudentSystem.Data;
 using AzureTeacherStudentSystem.Models;
 
-namespace AzureTeacherStudentSystem.Pages.Students
+namespace AzureTeacherStudentSystem.Pages.Subjects
 {
     public class CreateModel : PageModel
     {
@@ -17,25 +17,20 @@ namespace AzureTeacherStudentSystem.Pages.Students
         public CreateModel(AzureTeacherStudentSystem.Data.DataContext context)
         {
             _context = context;
-            Groups = new();
         }
-
-        public List<Group> Groups { get; set; }
 
         public IActionResult OnGet()
         {
-            Groups = _context.Groups.ToList();
             return Page();
         }
 
         [BindProperty]
-        public Student Student { get; set; } = default!;
+        public Subject Subject { get; set; } = default!;
 
         // For more information, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync(int group)
+        public async Task<IActionResult> OnPostAsync()
         {
-            Student.Group = _context.Groups.Find(group);
-            _context.Students.Add(Student);
+            _context.Subjects.Add(Subject);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
