@@ -19,16 +19,34 @@ namespace AzureTeacherStudentSystem.Pages.Students
             _context = context;
         }
 
-        public IList<Student> Student { get;set; } = default!;
+    
+		[BindProperty(SupportsGet = true)]
+		public string FirstName { get; set; }
 
-        public async Task OnGetAsync()
-        {
-            /*написати запит на отримання перших 20 студентів що вчаться у групі
-                groupName і чиє імя містить букву а*/
+		[BindProperty(SupportsGet = true)]
+		public string LastName { get; set; }
 
-            Student = await _context.Students
-                .Include(s => s.Group)
-                .ToListAsync();
-        }
-    }
+		[BindProperty(SupportsGet = true)]
+		public string GroupName { get; set; }
+
+		[BindProperty(SupportsGet = true)]
+		public string Email { get; set; }
+
+		public IList<Student> Student { get; set; } = default!;
+
+		public async Task OnGetAsync()
+		{
+			var studentQuery = _context.Students
+				.Include(s => s.Group)
+				.AsQueryable();
+
+			studentQuery = studentQuery
+				.Where(s => string.IsNullOrEmpty(FirstName) || s.FirstName.Contains(FirstName))
+				.Where(s => string.IsNullOrEmpty(LastName) || s.LastName.Contains(LastName))
+				.Where(s => string.IsNullOrEmpty(GroupName) || s.Group.Name.Contains(GroupName))
+				.Where(s => string.IsNullOrEmpty(Email) || s.Email.Contains(Email));
+
+			Student = await studentQuery.ToListAsync();
+		}
+	}
 }

@@ -1,0 +1,39 @@
+﻿@page
+@model AzureTeacherStudentSystem.Pages.Students.StudentSearchModel
+@{
+}
+
+<h1>Search Students</h1>
+
+<form method="get" asp-page="/Students/Index">
+    <div class="form-group mt-3">
+        <label for="FirstName">First Name</label>
+        <input type="text" class="form-control" id="FirstName" name="FirstName" value="@Model.FirstName" />
+    </div>
+
+    <div class="form-group mt-3">
+        <label for="LastName">Last Name</label>
+        <input type="text" class="form-control" id="LastName" name="LastName" value="@Model.LastName" />
+    </div>
+    
+    <div class="form-group mt-3">
+        <label for="Email">Email</label>
+        <input type="email" class="form-control" id="Email" name="Email" value="@Model.Email" />
+    </div>
+    
+    <div class="form-group mt-3">
+        <label for="Group">Group</label>
+        <select class="form-control" id="Group" name="GroupName">
+            @foreach (var group in Model.Groups)
+            {
+                <option value="@group.Name">@group.Name</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-4">Search</button>
+
+    <div>
+        <a asp-page="Index">Back to List</a>
+    </div>
+</form>

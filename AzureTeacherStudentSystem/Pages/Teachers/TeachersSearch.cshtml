@@ -1,0 +1,36 @@
+﻿@page
+@model AzureTeacherStudentSystem.Pages.Teachers.TeachersSearchModel
+
+@{
+    ViewData["Title"] = "Search Teachers";
+}
+
+<h1>Search Teachers</h1>
+
+<form method="get" asp-page="/Teachers/Index">
+    <div class="form-group mt-3">
+        <label for="FirstName">First Name</label>
+        <input type="text" class="form-control" id="FirstName" name="FirstName" value="@Model.FirstName" />
+    </div>
+
+    <div class="form-group mt-3">
+        <label for="LastName">Last Name</label>
+        <input type="text" class="form-control" id="LastName" name="LastName" value="@Model.LastName" />
+    </div>
+
+    <div class="form-group mt-3">
+        <label for="Email">Email</label>
+        <input type="email" class="form-control" id="Email" name="Email" value="@Model.Email" />
+    </div>
+
+    <div class="form-group mt-3">
+        <label for="MinSalary">Minimum Salary</label>
+        <input type="number" class="form-control" id="MinSalary" name="Salary" value="@Model.MinSalary" />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-4">Search</button>
+
+    <div class="mt-3">
+        <a asp-page="Index">Back to List</a>
+    </div>
+</form>
